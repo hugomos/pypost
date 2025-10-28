@@ -1,9 +1,9 @@
 import os, sys
 
 from PyQt5.QtWidgets import QDialog
-from .generate_post_form_two import Ui_GeneratePostDialog
+from .generate_post_form import Ui_GeneratePostDialog
 
-CSS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'dark.qss'))
+CSS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'styles.qss'))
 
 class GeneratePostWidget(QDialog, Ui_GeneratePostDialog):
     def __init__(self):
