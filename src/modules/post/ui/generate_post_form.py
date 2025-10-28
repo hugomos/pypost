@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'generate_post_form_two.ui'
+# Form implementation generated from reading ui file 'generate_post_form.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -90,6 +90,7 @@ class Ui_GeneratePostDialog(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.post_text_edit = QtWidgets.QTextEdit(self.scrollAreaWidgetContents)
+        self.post_text_edit.setReadOnly(True)
         self.post_text_edit.setObjectName("post_text_edit")
         self.verticalLayout_3.addWidget(self.post_text_edit)
         self.viewer_scroll_area.setWidget(self.scrollAreaWidgetContents)
