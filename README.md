@@ -1,4 +1,4 @@
-# AI Post Generator
+# PyPost
 
 Aplicação desktop para geração automática de posts de blog utilizando IA (Google Gemini), desenvolvida com PyQt5 e arquitetura limpa.
 
@@ -172,22 +172,5 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 - O preview HTML pode não renderizar estilos complexos
 - Necessária conexão com internet para usar a API do Gemini
-
-<!-- ## 🔮 Roadmap
-
-- [ ] Suporte para múltiplos modelos de IA
-- [ ] Editor de posts integrado
-- [ ] Histórico de posts gerados
-- [ ] Templates personalizáveis
-- [ ] Exportação em batch
-- [ ] Análise de SEO integrada -->
-
-<!-- ## 📞 Suporte
-
-Para problemas ou sugestões:
-- Abra uma [issue](link-para-issues)
-- Entre em contato: [email]
-
---- -->
 
 **Nota**: Esta aplicação requer uma API Key válida do Google AI para funcionar. Obtenha a sua em [Google AI Studio](https://makersuite.google.com/app/apikey).
