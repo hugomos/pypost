@@ -11,5 +11,5 @@ class ControllerFactory:
     def generate_post_ui_controller(self):
         return GeneratePostUIController(
             ui=GeneratePostWidget(),
-            generate_markdown_post_use_case=self.use_case_factory.generate_markdown_post()
+            generate_post_use_case=self.use_case_factory.generate_post()
         )

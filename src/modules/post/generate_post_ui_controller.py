@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QFileDialog
 
 from infra.ui_controller import UI_Controller
 from .ui.generate_post_widget import GeneratePostWidget
-from .application.use_case.generate_markdown_post import GenerateMarkdownPost
+from .application.use_case.generate_post import GeneratePost
 
 from markdown import markdown
 from slug import slug
@@ -12,12 +12,12 @@ class GeneratePostUIController(UI_Controller):
     def __init__(
         self,
         ui: GeneratePostWidget,
-        generate_markdown_post_use_case: GenerateMarkdownPost
+        generate_post_use_case: GeneratePost
     ):
         UI_Controller.__init__(self)
 
         self.ui = ui
-        self.generate_markdown_post_use_case = generate_markdown_post_use_case
+        self.generate_post_use_case = generate_post_use_case
 
         self.ui.exec_button.clicked.connect(self.execute)
         self.ui.explorer_button.clicked.connect(self.select_output_dir)
@@ -74,7 +74,9 @@ class GeneratePostUIController(UI_Controller):
             self.show_box_error("O formato do arquivo gerado é obrigatório")
             return
 
-        output_type = output_type.replace(" ", "_").lower()
+        output_type = output_type.replace(" ", "").lower()
+        output_extension = {"markdown": "md", "html": "html", "plaintext": "txt"}[output_type]
+
         output_dir = self.ui.output_dir_line_edit.text().strip()
 
         if not output_dir:
@@ -85,22 +87,27 @@ class GeneratePostUIController(UI_Controller):
         input_ = {
             "subject": subject,
             "keywords": keywords.replace(", ", ","),
+            "output_type": output_type
         }
 
-        response = self.generate_markdown_post_use_case.perform(input_)
+        response = self.generate_post_use_case.perform(input_)
         if response.is_left():
             self._set_is_loading(False)
             self.show_box_error(str(response.value))
             return
 
         file_name = slug(subject).replace(" ", "_")
-        output_path = os.path.abspath(os.path.join(output_dir, f"{file_name}.md"))
+        output_path = os.path.abspath(os.path.join(output_dir, f"{file_name}.{output_extension}"))
+
+        output_content = response.value.replace(f"```{output_type}", "").replace("```", "")
 
         with open(output_path, "w", encoding="utf-8") as file:
-            file.write(response.value)
+            file.write(output_content)
+            file.close()
 
-        output_content = response.value.replace("```markdown", "").replace("```", "")
         self.set_previewer(output_content, output_type)
 
         self._set_is_loading(False)
-        self.show_box_info(f"Post gerado com sucesso em {output_path}")
+        self.show_box_success(
+          f"Post: {subject} gerado com sucesso e salvo em {output_path.split(os.path.expanduser('~'))[-1]}"
+        )
