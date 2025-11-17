@@ -1,3 +1,5 @@
+![interface](./.github/interface.png)
+
 # AI Post Generator
 
 Aplicação desktop para geração automática de posts de blog utilizando IA (Google Gemini), desenvolvida com PyQt5 e arquitetura limpa.
