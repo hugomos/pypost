@@ -1,4 +1,4 @@
-![interface](./.github/interface.png)
+![interface](https://github.com/hugomos/pypost/blob/main/.github/interface.png?raw=true)
 
 # AI Post Generator
 
